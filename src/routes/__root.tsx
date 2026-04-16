@@ -37,6 +37,10 @@ export const Route = createRootRoute({
       { name: "author", content: "Automation Studio" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Automation Studio — AI-Powered Business Automation" },
+      { name: "twitter:title", content: "Automation Studio — AI-Powered Business Automation" },
+      { property: "og:description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
+      { name: "twitter:description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
