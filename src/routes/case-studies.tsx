@@ -202,7 +202,7 @@ function CaseStudiesPage() {
       {/* Case studies */}
       <section className="section-padding">
         <div className="mx-auto max-w-5xl px-6 space-y-12">
-          {filtered.map((study, i) => (
+          {filtered.map((study) => (
             <motion.article
               key={study.client}
               initial={{ opacity: 0, y: 30 }}
@@ -235,12 +235,12 @@ function CaseStudiesPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="p-5 rounded-sm bg-green-500/5 border border-green-500/10">
-                    <h4 className="text-sm font-semibold uppercase tracking-wider text-green-700 mb-3">After</h4>
+                  <div className="p-5 rounded-sm bg-accent/60 border border-gold/10">
+                    <h4 className="text-sm font-semibold uppercase tracking-wider text-gold mb-3">After</h4>
                     <ul className="space-y-2">
                       {study.after.map((a, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="text-green-600 mt-0.5 shrink-0">✓</span>
+                          <span className="text-gold mt-0.5 shrink-0">✓</span>
                           <span>{a}</span>
                         </li>
                       ))}
