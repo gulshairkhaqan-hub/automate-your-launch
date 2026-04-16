@@ -13,8 +13,8 @@ export function SectionHeading({ label, title, description, align = "center", li
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       className={`mb-12 md:mb-16 ${align === "center" ? "text-center" : "text-left"}`}
     >
       {label && (
