@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+const inputCls = "w-full rounded-md border border-border bg-surface-3/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/30 transition-all";
+
 export function LeadCaptureForm() {
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -9,7 +11,6 @@ export function LeadCaptureForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submission — replace with actual API call later
     await new Promise((r) => setTimeout(r, 1000));
     setSubmitted(true);
     setLoading(false);
@@ -22,8 +23,8 @@ export function LeadCaptureForm() {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-12"
       >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gold-gradient mb-6">
-          <svg className="w-8 h-8 text-gold-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gold-gradient mb-6 shadow-lg shadow-cyan/30">
+          <svg className="w-8 h-8 text-gold-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -37,35 +38,38 @@ export function LeadCaptureForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">Full Name</label>
+          <label htmlFor="lead-name" className="block font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">Full Name</label>
           <input
+            id="lead-name"
             required
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="John Smith"
-            className="w-full rounded-sm border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/40 transition-shadow"
+            className={inputCls}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
+          <label htmlFor="lead-email" className="block font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">Email</label>
           <input
+            id="lead-email"
             required
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="john@company.com"
-            className="w-full rounded-sm border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/40 transition-shadow"
+            className={inputCls}
           />
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1.5">Business Type</label>
+        <label htmlFor="lead-business" className="block font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">Business Type</label>
         <select
+          id="lead-business"
           required
           value={formData.business}
           onChange={(e) => setFormData({ ...formData, business: e.target.value })}
-          className="w-full rounded-sm border border-input bg-background px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-gold/40 transition-shadow"
+          className={inputCls}
         >
           <option value="">Select your business type</option>
           <option value="coach">Coach / Consultant</option>
@@ -77,24 +81,25 @@ export function LeadCaptureForm() {
         </select>
       </div>
       <div>
-        <label className="block text-sm font-medium text-foreground mb-1.5">What's your biggest bottleneck?</label>
+        <label htmlFor="lead-msg" className="block font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">Your biggest bottleneck?</label>
         <textarea
+          id="lead-msg"
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           rows={3}
           placeholder="E.g., I'm losing leads because my follow-up is too slow..."
-          className="w-full rounded-sm border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/40 transition-shadow resize-none"
+          className={`${inputCls} resize-none`}
         />
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-charcoal-light disabled:opacity-60"
+        className="btn-press w-full rounded-md gold-gradient px-6 py-3.5 text-sm font-semibold text-gold-foreground disabled:opacity-60 shadow-lg shadow-cyan/20 hover:shadow-cyan/40"
       >
         {loading ? "Submitting..." : "Get Your Free Automation Audit →"}
       </button>
-      <p className="text-xs text-muted-foreground text-center">
-        🔒 Your information is 100% secure. We never share your data.
+      <p className="text-xs text-muted-foreground/70 text-center font-mono">
+        🔒 your_data.encrypted = true · we never share your info
       </p>
     </form>
   );

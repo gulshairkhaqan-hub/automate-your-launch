@@ -2,10 +2,10 @@ import { Link } from "@tanstack/react-router";
 
 export function MobileCTA() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-primary/95 backdrop-blur-md border-t border-border/20 px-4 py-3 safe-area-pb">
+    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-surface-3/90 backdrop-blur-xl border-t border-border/40 px-4 py-3">
       <Link
         to="/contact"
-        className="flex items-center justify-center w-full rounded-sm gold-gradient px-5 py-3 text-sm font-semibold text-gold-foreground tracking-wide"
+        className="btn-press flex items-center justify-center w-full rounded-md gold-gradient px-5 py-3.5 text-sm font-semibold text-gold-foreground tracking-tight shadow-lg shadow-cyan/20"
       >
         Book Free Audit — It's Free
       </Link>
