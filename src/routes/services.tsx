@@ -32,7 +32,7 @@ const allServices = [
   {
     icon: "🔄",
     title: "Workflow Automation",
-    problem: "Your team spends 15+ hours per week on repetitive tasks — data entry, status updates, file management — that add zero value to your bottom line.",
+    problem: "Your team spends 15+ hours per week on repetitive tasks — data entry, status updates, file management — that add zero value.",
     deliverables: [
       "Current workflow audit and process mapping",
       "Custom n8n/Make automation builds",
@@ -105,20 +105,20 @@ function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="section-padding charcoal-gradient">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative section-padding charcoal-gradient bg-noise overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
+        <div className="relative mx-auto max-w-7xl px-6">
           <SectionHeading
-            label="Our Services"
-            title="Automation Solutions Built for Growth"
+            label="Services"
+            title="Built for growth. Engineered to last."
             description="Every solution is custom-built for your business. No templates, no cookie-cutter approaches — just intelligent systems that deliver measurable results."
-            light
           />
         </div>
       </section>
 
       {/* Services */}
       <section className="section-padding">
-        <div className="mx-auto max-w-5xl px-6 space-y-8">
+        <div className="mx-auto max-w-5xl px-6 space-y-6">
           {allServices.map((service, i) => (
             <motion.article
               key={i}
@@ -126,35 +126,36 @@ function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: "easeOut" as const }}
-              className="rounded-sm border border-border bg-card overflow-hidden hover:border-gold/20 transition-colors"
+              className="card-hover glass-card rounded-xl overflow-hidden"
             >
-              <div className="p-8 md:p-10">
+              <div className="p-7 md:p-10">
                 {/* Header */}
                 <div className="flex items-start gap-4">
-                  <span className="text-4xl shrink-0">{service.icon}</span>
-                  <div>
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{service.title}</h2>
-                    <div className="flex flex-wrap items-center gap-4 mt-2">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-gold">{service.timeline}</span>
-                      <span className="text-xs text-muted-foreground">•</span>
-                      <span className="text-sm font-semibold text-foreground">From {service.startingPrice}</span>
+                  <div className="w-14 h-14 rounded-lg gold-gradient flex items-center justify-center text-2xl shrink-0 shadow-md shadow-cyan/20">
+                    {service.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground tracking-tight">{service.title}</h2>
+                    <div className="flex flex-wrap items-center gap-3 mt-2">
+                      <span className="font-mono text-xs font-medium uppercase tracking-wider text-cyan border border-cyan/30 rounded-full px-2.5 py-0.5">{service.timeline}</span>
+                      <span className="font-mono text-sm font-semibold text-foreground">from {service.startingPrice}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Problem */}
-                <div className="mt-6 p-5 rounded-sm bg-destructive/5 border border-destructive/10">
-                  <p className="text-sm font-medium text-foreground mb-1">The Problem:</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{service.problem}</p>
+                <div className="mt-6 p-5 rounded-lg bg-destructive/10 border border-destructive/20">
+                  <p className="font-mono text-xs uppercase tracking-wider text-destructive font-semibold mb-2">// the problem</p>
+                  <p className="text-sm text-foreground/85 leading-relaxed">{service.problem}</p>
                 </div>
 
                 {/* Deliverables */}
                 <div className="mt-6">
-                  <p className="text-sm font-medium text-foreground mb-3">What You Get:</p>
-                  <ul className="space-y-2">
+                  <p className="font-mono text-xs uppercase tracking-wider text-cyan font-semibold mb-3">// what you get</p>
+                  <ul className="space-y-2.5">
                     {service.deliverables.map((d, j) => (
                       <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <span className="text-gold mt-0.5 shrink-0">✓</span>
+                        <span className="text-cyan mt-0.5 shrink-0">✓</span>
                         <span>{d}</span>
                       </li>
                     ))}
@@ -165,7 +166,7 @@ function ServicesPage() {
                 <div className="mt-8">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-charcoal-light focus:outline-none focus:ring-2 focus:ring-gold/40"
+                    className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-6 py-3 text-sm font-semibold text-gold-foreground shadow-md shadow-cyan/20 hover:shadow-cyan/40"
                   >
                     Get Started →
                   </Link>
@@ -177,17 +178,17 @@ function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding charcoal-gradient">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="relative section-padding charcoal-gradient overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
           <SectionHeading
             label="Not Sure Where to Start?"
-            title="Book a Free Audit"
+            title="Book a free audit."
             description="We'll analyze your current workflows and recommend the automations that'll deliver the biggest ROI — completely free."
-            light
           />
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center rounded-sm gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground tracking-wide transition-all hover:opacity-90"
+            className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
           >
             Book Your Free Audit →
           </Link>
