@@ -60,9 +60,18 @@ export function Footer() {
           <div className="md:col-span-4">
             <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan mb-5">// contact</h4>
             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <span>hello@automation.studio</span>
-              <span>(555) 123-4567</span>
-              <span>Mon–Fri, 9am–6pm EST</span>
+              <a href="mailto:gulshairkhaqan@gmail.com" className="hover:text-foreground transition-colors">
+                gulshairkhaqan@gmail.com
+              </a>
+              <a
+                href="https://wa.me/923251174475"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
+              >
+                <span className="text-cyan">WhatsApp:</span> +92 325 1174475
+              </a>
+              <span>Mon–Fri, 9am–6pm PKT</span>
               <Link to="/contact" className="inline-flex items-center gap-1 text-cyan hover:text-cyan-light transition-colors font-medium mt-2">
                 Book a Free Audit →
               </Link>
