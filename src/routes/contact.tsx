@@ -136,9 +136,15 @@ function ContactPage() {
               >
                 <h4 className="font-heading text-lg font-bold text-foreground mb-3">Direct contact</h4>
                 <div className="space-y-2.5 text-sm text-muted-foreground font-mono">
-                  <p className="flex items-center gap-2"><span className="text-cyan">→</span> hello@automation.studio</p>
-                  <p className="flex items-center gap-2"><span className="text-cyan">→</span> (555) 123-4567</p>
-                  <p className="flex items-center gap-2"><span className="text-cyan">→</span> Mon–Fri, 9am–6pm EST</p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-cyan">→</span>
+                    <a href="mailto:gulshairkhaqan@gmail.com" className="hover:text-foreground transition-colors">gulshairkhaqan@gmail.com</a>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-cyan">→</span>
+                    <a href="https://wa.me/923251174475" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp: +92 325 1174475</a>
+                  </p>
+                  <p className="flex items-center gap-2"><span className="text-cyan">→</span> Mon–Fri, 9am–6pm PKT</p>
                 </div>
               </motion.div>
             </div>
