@@ -278,7 +278,7 @@
     height: 5px;
     border-radius: 9999px;
     background: var(--accent-cyan);
-    box-shadow: 0 0 8px var(--accent-cyan);
+    box-shadow: 0 0 9px var(--accent-cyan);
   }
 
   /* Press feedback button */
