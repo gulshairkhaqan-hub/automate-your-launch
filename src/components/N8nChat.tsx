@@ -20,8 +20,9 @@ export function N8nChat() {
     if ((window as unknown as Record<string, unknown>)[SCRIPT_FLAG]) return;
     (window as unknown as Record<string, unknown>)[SCRIPT_FLAG] = true;
 
-    import(/* @vite-ignore */ "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js")
-      .then((mod: { createChat: (opts: { webhookUrl: string }) => void }) => {
+    const url = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+    (new Function("u", "return import(u)")(url) as Promise<{ createChat: (opts: { webhookUrl: string }) => void }>)
+      .then((mod) => {
         mod.createChat({
           webhookUrl:
             "https://gulshair.app.n8n.cloud/webhook/a513cdfa-af4c-4fd6-9e48-6bd8fc357624/chat",
