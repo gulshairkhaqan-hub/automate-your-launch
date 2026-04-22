@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { MobileCTA } from "../components/MobileCTA";
+import { N8nChat } from "../components/N8nChat";
 
 import appCss from "../styles.css?url";
 
@@ -77,6 +78,7 @@ function RootComponent() {
       </main>
       <Footer />
       <MobileCTA />
+      <N8nChat />
     </>
   );
 }
