@@ -13,7 +13,9 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -35,48 +37,88 @@ const CaseStudiesRoute = CaseStudiesRouteImport.update({
   path: '/case-studies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/admin/leads': typeof AdminLeadsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/admin/leads': typeof AdminLeadsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/admin/leads': typeof AdminLeadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/case-studies' | '/contact' | '/pricing' | '/services'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/case-studies'
+    | '/contact'
+    | '/pricing'
+    | '/services'
+    | '/admin/leads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/case-studies' | '/contact' | '/pricing' | '/services'
-  id: '__root__' | '/' | '/case-studies' | '/contact' | '/pricing' | '/services'
+  to:
+    | '/'
+    | '/auth'
+    | '/case-studies'
+    | '/contact'
+    | '/pricing'
+    | '/services'
+    | '/admin/leads'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/case-studies'
+    | '/contact'
+    | '/pricing'
+    | '/services'
+    | '/admin/leads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
   PricingRoute: typeof PricingRoute
   ServicesRoute: typeof ServicesRoute
+  AdminLeadsRoute: typeof AdminLeadsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -116,15 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
   PricingRoute: PricingRoute,
   ServicesRoute: ServicesRoute,
+  AdminLeadsRoute: AdminLeadsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
