@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const inputCls = "w-full rounded-md border border-border bg-surface-3/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/30 transition-all";
 
@@ -10,10 +12,55 @@ export function LeadCaptureForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return; // prevent duplicate submissions
+
+    // Client-side validation
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    if (!name) {
+      toast.error("Please enter your name.");
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setSubmitted(true);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("submit-lead", {
+        body: {
+          name,
+          email,
+          business: formData.business || null,
+          message: formData.message || null,
+          source_page: typeof window !== "undefined" ? window.location.pathname : null,
+        },
+      });
+
+      if (error) {
+        console.error("[LeadCaptureForm] submit failed", error);
+        toast.error("Something went wrong. Please try again or message us on WhatsApp.");
+        return;
+      }
+
+      if (data && (data as { success?: boolean }).success) {
+        const notified = (data as { notified?: boolean }).notified;
+        if (notified === false) {
+          // DB save succeeded; notification didn't (still a success for the user)
+          console.warn("[LeadCaptureForm] Lead saved but notification webhook failed");
+        }
+        setSubmitted(true);
+        toast.success("Message sent successfully. We'll be in touch within 24 hours.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("[LeadCaptureForm] unexpected error", err);
+      toast.error("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {

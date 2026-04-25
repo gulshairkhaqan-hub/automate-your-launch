@@ -1,4 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import { WhatsAppLink, MailtoLink } from "./ContactActions";
+import { WHATSAPP_DISPLAY } from "@/lib/contact";
 
 const socials = [
   { label: "LinkedIn", href: "#", icon: "M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3v9zm-1.5-10.3a1.7 1.7 0 110-3.4 1.7 1.7 0 010 3.4zM19 19h-3v-4.7c0-1.1 0-2.5-1.5-2.5s-1.7 1.2-1.7 2.4V19h-3v-9h2.9v1.3a3.2 3.2 0 012.9-1.6c3.1 0 3.7 2 3.7 4.7V19z" },
@@ -60,17 +62,18 @@ export function Footer() {
           <div className="md:col-span-4">
             <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-cyan mb-5">// contact</h4>
             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <a href="mailto:gulshairkhaqan@gmail.com" className="hover:text-foreground transition-colors">
+              <MailtoLink
+                subject="Inquiry from automation.studio"
+                className="hover:text-foreground transition-colors"
+              >
                 gulshairkhaqan@gmail.com
-              </a>
-              <a
-                href="https://wa.me/923251174475"
-                target="_blank"
-                rel="noopener noreferrer"
+              </MailtoLink>
+              <WhatsAppLink
+                message="Hi Automation Studio, I'd like to learn more about your services."
                 className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
               >
-                <span className="text-cyan">WhatsApp:</span> +92 325 1174475
-              </a>
+                <span className="text-cyan">WhatsApp:</span> {WHATSAPP_DISPLAY}
+              </WhatsAppLink>
               <span>Mon–Fri, 9am–6pm PKT</span>
               <Link to="/contact" className="inline-flex items-center gap-1 text-cyan hover:text-cyan-light transition-colors font-medium mt-2">
                 Book a Free Audit →

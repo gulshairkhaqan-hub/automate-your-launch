@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { MobileCTA } from "../components/MobileCTA";
 import { N8nChat } from "../components/N8nChat";
+import { Toaster } from "../components/ui/sonner";
 
 import appCss from "../styles.css?url";
 
@@ -79,6 +80,7 @@ function RootComponent() {
       <Footer />
       <MobileCTA />
       <N8nChat />
+      <Toaster theme="dark" position="bottom-center" richColors closeButton />
     </>
   );
 }
