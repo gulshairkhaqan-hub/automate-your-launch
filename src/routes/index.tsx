@@ -157,10 +157,13 @@ function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, ease: "easeOut" as const }}
-                className={`card-hover glass-card rounded-xl p-7 ${service.size === "lg" ? "md:col-span-2" : ""}`}
+                className={`tilt-card glass-card rounded-xl p-7 ${service.size === "lg" ? "md:col-span-2" : ""}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-lg gold-gradient flex items-center justify-center text-xl shrink-0 shadow-md shadow-cyan/20">
+                  <div
+                    className="w-11 h-11 rounded-lg gold-gradient flex items-center justify-center text-xl shrink-0 shadow-md shadow-cyan/20 animate-float"
+                    style={{ animationDelay: `${i * 0.25}s` }}
+                  >
                     {service.icon}
                   </div>
                   <div>
@@ -249,7 +252,8 @@ function HomePage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, ease: "easeOut" as const }}
-                className="text-center"
+                className="relative text-center px-4 py-5 rounded-2xl pulse-ring"
+                style={{ animationDelay: `${i * 0.3}s` }}
               >
                 <p className="font-heading text-4xl md:text-5xl font-bold text-gold-foreground tracking-tight">
                   <CountUp end={kpi.end} suffix={kpi.suffix} />
@@ -272,7 +276,13 @@ function HomePage() {
             title="Case studies coming soon."
             description="Currently onboarding first clients. Want to be one of them?"
           />
-          <div className="max-w-2xl mx-auto glass-card rounded-xl p-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" as const }}
+            className="max-w-2xl mx-auto glass-card rounded-xl p-10 text-center"
+          >
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-cyan/10 border border-cyan/30 mb-5">
               <span className="text-2xl">🚀</span>
             </div>
@@ -288,7 +298,7 @@ function HomePage() {
             >
               Become a founding client →
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
