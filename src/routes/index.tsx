@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { SectionHeading } from "../components/SectionHeading";
 import { LeadCaptureForm } from "../components/LeadCaptureForm";
+import { Hero3D } from "../components/Hero3D";
+import { Particles } from "../components/Particles";
+import { CountUp } from "../components/CountUp";
+import { TerminalTypewriter } from "../components/TerminalTypewriter";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,28 +38,21 @@ const services = [
   { icon: "🎯", title: "Custom Dashboards", description: "Real-time KPI dashboards pulling from all your tools so you make data-driven decisions.", size: "lg" },
 ];
 
-const kpis = [
-  { value: "500+", label: "Workflows Automated" },
-  { value: "2.4M", label: "Leads Captured" },
-  { value: "98%", label: "Client Retention" },
-  { value: "37x", label: "Average ROI" },
+const stats = [
+  { end: 2, suffix: "wk", label: "Avg. Build Time" },
+  { end: 24, suffix: "/7", label: "Automated Coverage" },
+  { end: 100, suffix: "%", label: "Custom-Built" },
+  { end: 0, suffix: "", label: "Templates Used" },
 ];
-
-const testimonials = [
-  { name: "Sarah Chen", role: "Real Estate Team Lead", company: "Pacific Realty", quote: "We went from losing 40% of leads to capturing 98%. Automation Studio transformed our entire follow-up process.", metric: "+145% closings" },
-  { name: "Marcus Williams", role: "Founder", company: "Bloom Naturals", quote: "Our customer support runs itself now. Response time went from 4 hours to under 2 minutes. Game-changer.", metric: "12x faster" },
-  { name: "Jessica Park", role: "Business Coach", company: "Park Coaching Co.", quote: "I freed up 20 hours a week and doubled my client base. The ROI is insane — best investment I've made.", metric: "20 hrs saved/wk" },
-  { name: "David Ortega", role: "Operations Director", company: "ScaleUp Agency", quote: "Client onboarding went from 3 days to 3 hours. Our team can finally focus on strategy instead of admin.", metric: "24x onboarding" },
-];
-
-const logos = ["TechFlow", "ScaleUp", "GrowthHQ", "NextLevel", "ProSync", "AutoBase", "RevOps", "FlowState"];
 
 function HomePage() {
   return (
     <>
+      <Particles />
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden hero-atmos bg-noise">
         <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
+        <Hero3D />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" aria-hidden />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:py-36 w-full">
@@ -65,7 +62,7 @@ function HomePage() {
               <span className="font-mono text-xs font-medium text-cyan tracking-wider uppercase">AI Automation Engineering</span>
             </motion.div>
 
-            <motion.h1 {...fadeUp} className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+            <motion.h1 {...fadeUp} className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.02] tracking-tight neon-glow">
               Automate your business.{" "}
               <span className="gold-text-gradient">Scale without burnout.</span>
             </motion.h1>
@@ -77,7 +74,7 @@ function HomePage() {
             <motion.div {...fadeUp} className="mt-10 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/contact"
-                className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-7 py-3.5 text-sm font-semibold text-gold-foreground tracking-tight shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
+                className="btn-press neon-cta inline-flex items-center justify-center rounded-md px-7 py-3.5 text-sm font-semibold tracking-tight"
               >
                 Book Free Automation Audit
               </Link>
@@ -89,30 +86,25 @@ function HomePage() {
               </Link>
             </motion.div>
 
-            {/* Compact trust row */}
-            <motion.div {...fadeUp} className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl">
-              {kpis.map((k) => (
-                <div key={k.label}>
-                  <p className="font-heading text-2xl md:text-3xl font-bold gold-text-gradient">{k.value}</p>
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground/80 mt-1">{k.label}</p>
-                </div>
-              ))}
+            {/* Honest disclaimer */}
+            <motion.div {...fadeUp} className="mt-12 max-w-2xl">
+              <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground/80">
+                Results vary — book a free audit to see what's possible.
+              </p>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Client Logos ─────────────────────────────────── */}
-      <section className="border-y border-border/40 bg-surface-1/40 py-10" aria-label="Trusted clients">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-center font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground/70 mb-8">
-            // trusted by 200+ forward-thinking teams
+      {/* ── Honest banner (replaces fake client logos) ───── */}
+      <section className="border-y border-border/40 bg-surface-1/40 py-10" aria-label="About our work">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-cyan mb-3">
+            // currently onboarding first clients
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 md:gap-x-14">
-            {logos.map((logo) => (
-              <span key={logo} className="text-base font-semibold text-muted-foreground/40 tracking-wider select-none hover:text-muted-foreground transition-colors">{logo}</span>
-            ))}
-          </div>
+          <p className="text-base text-muted-foreground">
+            Case studies coming soon — currently onboarding first clients.
+          </p>
         </div>
       </section>
 
@@ -213,16 +205,7 @@ function HomePage() {
               <span className="w-2.5 h-2.5 rounded-full bg-cyan/70" />
               <span className="ml-3 font-mono text-xs text-muted-foreground">automation.workflow.ts</span>
             </div>
-            <pre className="font-mono text-[13px] leading-relaxed p-5 overflow-x-auto text-muted-foreground">
-<span className="text-cyan">$</span> <span className="text-foreground">audit</span> <span className="text-violet">--free</span>{"\n"}
-<span className="text-muted-foreground/60">› analyzing workflows ...........</span> <span className="text-cyan">✓</span>{"\n"}
-<span className="text-muted-foreground/60">› identifying bottlenecks .......</span> <span className="text-cyan">✓</span>{"\n"}
-<span className="text-muted-foreground/60">› mapping ROI opportunities .....</span> <span className="text-cyan">✓</span>{"\n"}
-{"\n"}
-<span className="text-cyan">$</span> <span className="text-foreground">build</span> <span className="text-violet">--custom</span>{"\n"}
-<span className="text-muted-foreground/60">› deploying automation system to production</span>{"\n"}
-<span className="text-foreground">→ ready in 2 weeks. zero templates. all yours.</span>
-            </pre>
+            <TerminalTypewriter />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -259,7 +242,7 @@ function HomePage() {
         <div className="absolute inset-0 bg-grid opacity-20" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            {kpis.map((kpi, i) => (
+            {stats.map((kpi, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.92 }}
@@ -268,54 +251,43 @@ function HomePage() {
                 transition={{ delay: i * 0.08, ease: "easeOut" as const }}
                 className="text-center"
               >
-                <p className="font-heading text-4xl md:text-5xl font-bold text-gold-foreground tracking-tight">{kpi.value}</p>
+                <p className="font-heading text-4xl md:text-5xl font-bold text-gold-foreground tracking-tight">
+                  <CountUp end={kpi.end} suffix={kpi.suffix} />
+                </p>
                 <p className="font-mono text-xs uppercase tracking-wider text-gold-foreground/75 mt-2">{kpi.label}</p>
               </motion.div>
             ))}
           </div>
+          <p className="mt-8 text-center font-mono text-[11px] uppercase tracking-wider text-gold-foreground/80">
+            Results vary — book a free audit to see what's possible.
+          </p>
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────── */}
+      {/* ── Testimonials → Coming Soon ───────────────────── */}
       <section className="section-padding" aria-label="Client testimonials">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
             label="Results"
-            title="What clients are saying."
-            description="Real outcomes from real businesses — not hypotheticals."
+            title="Case studies coming soon."
+            description="Currently onboarding first clients. Want to be one of them?"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, ease: "easeOut" as const }}
-                className="card-hover glass-card rounded-xl p-7"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, j) => (
-                      <svg key={j} className="w-4 h-4 text-cyan" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-cyan border border-cyan/30 rounded-full px-2.5 py-0.5">{t.metric}</span>
-                </div>
-                <p className="text-base text-foreground/85 leading-relaxed">"{t.quote}"</p>
-                <div className="mt-6 pt-4 border-t border-border/40 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-sm font-semibold text-gold-foreground">
-                    {t.name.split(" ").map(n => n[0]).join("")}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}, {t.company}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="max-w-2xl mx-auto glass-card rounded-xl p-10 text-center">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-cyan/10 border border-cyan/30 mb-5">
+              <span className="text-2xl">🚀</span>
+            </div>
+            <p className="text-base md:text-lg text-foreground/85 leading-relaxed">
+              Case studies coming soon — currently onboarding first clients.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Results vary. Book a free audit to see what's possible for your business.
+            </p>
+            <Link
+              to="/contact"
+              className="btn-press neon-cta mt-7 inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold"
+            >
+              Become a founding client →
+            </Link>
           </div>
         </div>
       </section>
@@ -349,12 +321,12 @@ function HomePage() {
               <span className="gold-text-gradient">Start scaling.</span>
             </h2>
             <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-xl mx-auto">
-              Join 200+ businesses that automated their way to growth. Your free audit is one click away.
+              Results vary — book a free audit to see what's possible for your business.
             </p>
             <div className="mt-9">
               <Link
                 to="/contact"
-                className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground tracking-tight shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
+                className="btn-press neon-cta inline-flex items-center justify-center rounded-md px-8 py-4 text-sm font-semibold tracking-tight"
               >
                 Book Free Automation Audit →
               </Link>

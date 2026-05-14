@@ -76,10 +76,10 @@
   --radius: 0.625rem;
 
   /* Layered surfaces — deep navy/graphite */
-  --background: oklch(0.16 0.02 260);          /* page bg ~ #0B1220 */
-  --surface-1: oklch(0.18 0.022 260);          /* section */
-  --surface-2: oklch(0.22 0.025 260);          /* card */
-  --surface-3: oklch(0.13 0.018 260);          /* deeper, hero base ~ #070A12 */
+  --background: oklch(0.13 0.035 285);         /* page bg ~ #050510 */
+  --surface-1: oklch(0.17 0.038 280);          /* section */
+  --surface-2: oklch(0.20 0.04 280);           /* card */
+  --surface-3: oklch(0.11 0.03 285);           /* deeper, hero base */
 
   --foreground: oklch(0.96 0.01 240);          /* off-white */
   --card: oklch(0.22 0.025 260);
@@ -87,9 +87,9 @@
   --popover: oklch(0.20 0.022 260);
   --popover-foreground: oklch(0.96 0.01 240);
 
-  /* Primary — cyan accent */
-  --primary: oklch(0.78 0.16 210);
-  --primary-foreground: oklch(0.14 0.02 260);
+  /* Primary — indigo accent #6366f1 */
+  --primary: oklch(0.60 0.20 277);
+  --primary-foreground: oklch(0.98 0.005 240);
 
   --secondary: oklch(0.24 0.025 260);
   --secondary-foreground: oklch(0.92 0.012 240);
@@ -103,13 +103,15 @@
 
   --border: oklch(0.30 0.025 260 / 0.6);
   --input: oklch(0.28 0.025 260);
-  --ring: oklch(0.78 0.16 210);
+  --ring: oklch(0.60 0.20 277);
 
-  /* Accent tokens */
-  --accent-cyan: oklch(0.82 0.16 205);          /* electric cyan */
-  --accent-cyan-light: oklch(0.90 0.12 200);
-  --accent-cyan-foreground: oklch(0.14 0.02 260);
+  /* Accent tokens — primary indigo + secondary neon green */
+  --accent-cyan: oklch(0.60 0.20 277);          /* indigo #6366f1 */
+  --accent-cyan-light: oklch(0.72 0.18 280);
+  --accent-cyan-foreground: oklch(0.10 0.02 280);
   --accent-violet: oklch(0.65 0.22 295);
+  --accent-neon: oklch(0.85 0.25 152);          /* neon green #00ff88 — CTA only */
+  --accent-neon-foreground: oklch(0.12 0.02 280);
 
   /* Charts */
   --chart-1: oklch(0.82 0.16 205);
@@ -119,14 +121,14 @@
   --chart-5: oklch(0.85 0.12 160);
 
   /* Sidebar */
-  --sidebar: oklch(0.13 0.018 260);
+  --sidebar: oklch(0.11 0.03 285);
   --sidebar-foreground: oklch(0.96 0.01 240);
-  --sidebar-primary: oklch(0.82 0.16 205);
-  --sidebar-primary-foreground: oklch(0.14 0.02 260);
-  --sidebar-accent: oklch(0.22 0.025 260);
+  --sidebar-primary: oklch(0.60 0.20 277);
+  --sidebar-primary-foreground: oklch(0.98 0.005 240);
+  --sidebar-accent: oklch(0.20 0.04 280);
   --sidebar-accent-foreground: oklch(0.96 0.01 240);
-  --sidebar-border: oklch(0.30 0.025 260 / 0.6);
-  --sidebar-ring: oklch(0.82 0.16 205);
+  --sidebar-border: rgba(99, 102, 241, 0.2);
+  --sidebar-ring: oklch(0.60 0.20 277);
 }
 
 @layer base {
@@ -142,6 +144,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -165,6 +168,29 @@
 }
 
 @layer utilities {
+  /* Neon CTA button — secondary accent #00ff88 */
+  .neon-cta {
+    background-color: var(--accent-neon);
+    color: var(--accent-neon-foreground);
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--accent-neon) 60%, transparent),
+      0 8px 24px -6px color-mix(in oklab, var(--accent-neon) 45%, transparent),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .neon-cta:hover {
+    box-shadow:
+      0 0 0 1px var(--accent-neon),
+      0 12px 32px -6px color-mix(in oklab, var(--accent-neon) 65%, transparent),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+
+  /* Hero headline neon glow */
+  .neon-glow {
+    text-shadow:
+      0 0 18px color-mix(in oklab, var(--accent-cyan) 40%, transparent),
+      0 0 42px color-mix(in oklab, var(--accent-cyan) 22%, transparent);
+  }
+
   /* Backwards-compat aliases */
   .text-gold { color: var(--color-gold); }
   .bg-charcoal { background-color: var(--color-charcoal); }
@@ -208,9 +234,9 @@
   /* Glass card */
   .glass-card {
     background: linear-gradient(180deg,
-      color-mix(in oklab, var(--surface-2) 80%, transparent),
-      color-mix(in oklab, var(--surface-1) 80%, transparent));
-    border: 1px solid color-mix(in oklab, white 8%, transparent);
+      color-mix(in oklab, var(--surface-2) 70%, transparent),
+      color-mix(in oklab, var(--surface-1) 70%, transparent));
+    border: 1px solid rgba(99, 102, 241, 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow:
@@ -301,9 +327,11 @@
   }
   .card-hover:hover {
     transform: translateY(-3px);
-    border-color: color-mix(in oklab, var(--accent-cyan) 35%, transparent);
-    box-shadow: 0 12px 32px -16px color-mix(in oklab, var(--accent-cyan) 24%, transparent),
-                0 2px 6px -2px rgba(0,0,0,0.5);
+    border-color: rgba(99, 102, 241, 0.55);
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.35),
+      0 12px 36px -12px rgba(99, 102, 241, 0.45),
+      0 2px 6px -2px rgba(0,0,0,0.5);
   }
 
   .glow-cyan {
