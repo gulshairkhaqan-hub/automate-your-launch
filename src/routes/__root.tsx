@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { MobileCTA } from "../components/MobileCTA";
 import { WhatsAppFAB } from "../components/WhatsAppFAB";
+import { ChatWidget } from "../components/ChatWidget";
 import { Toaster } from "../components/ui/sonner";
 
 import appCss from "../styles.css?url";
@@ -73,6 +74,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
+      <div className="site-mesh" aria-hidden />
+      <div className="site-grid" aria-hidden />
       <Header />
       <main className="pt-16 md:pt-20 pb-16 md:pb-0">
         <Outlet />
@@ -80,6 +83,7 @@ function RootComponent() {
       <Footer />
       <MobileCTA />
       <WhatsAppFAB />
+      <ChatWidget />
       <Toaster theme="dark" position="bottom-center" richColors closeButton />
     </>
   );
