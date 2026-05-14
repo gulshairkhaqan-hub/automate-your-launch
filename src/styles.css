@@ -358,3 +358,106 @@
     }
   }
 }
+
+/* ── Custom keyframes ───────────────────────────────────────── */
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-cyan) 55%, transparent); }
+  70%  { box-shadow: 0 0 0 14px color-mix(in oklab, var(--accent-cyan) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-cyan) 0%, transparent); }
+}
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55), 0 8px 24px -4px rgba(37, 211, 102, 0.55); }
+  50%      { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0.0),  0 8px 36px -4px rgba(37, 211, 102, 0.85); }
+}
+@keyframes wa-ripple {
+  0%   { transform: scale(0.9); opacity: 0.55; }
+  80%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes attn-bounce {
+  0%   { transform: translateY(-40px); opacity: 0; }
+  60%  { transform: translateY(8px);  opacity: 1; }
+  80%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+@keyframes mesh-shift {
+  0%   { background-position: 0% 0%, 100% 100%; }
+  50%  { background-position: 100% 50%, 0% 50%; }
+  100% { background-position: 0% 0%, 100% 100%; }
+}
+@keyframes chat-pop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+@layer utilities {
+  /* Site-wide animated gradient mesh background (fixed behind content) */
+  .site-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, #0d0d2b 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 80% 70%, #0d0d2b 0%, transparent 60%),
+      #050510;
+    background-size: 200% 200%, 200% 200%, 100% 100%;
+    animation: mesh-shift 22s ease-in-out infinite;
+  }
+  .site-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image:
+      linear-gradient(to right,  #ffffff 1px, transparent 1px),
+      linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Floating bob (icons) */
+  .animate-float { animation: float-bob 3.6s ease-in-out infinite; }
+
+  /* Pulsing neon ring around stat tiles */
+  .pulse-ring {
+    animation: pulse-ring 2.4s ease-out infinite;
+    border-radius: 14px;
+  }
+
+  /* 3D tilt hover for service cards */
+  .tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 320ms cubic-bezier(.2,.8,.2,1),
+                box-shadow 320ms ease,
+                border-color 320ms ease;
+  }
+  .tilt-card:hover {
+    transform: perspective(900px) rotateY(5deg) translateY(-3px);
+    border-color: rgba(168, 85, 247, 0.55);
+    box-shadow:
+      0 0 0 1px rgba(168, 85, 247, 0.35),
+      0 14px 40px -12px rgba(168, 85, 247, 0.55);
+  }
+
+  /* WhatsApp FAB animations */
+  .wa-pulse  { animation: wa-pulse 2.4s ease-in-out infinite; }
+  .wa-bounce { animation: attn-bounce 1.1s cubic-bezier(.2,.8,.2,1) 1; }
+  .wa-ripple::before,
+  .wa-ripple::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: rgba(37, 211, 102, 0.45);
+    animation: wa-ripple 3s ease-out infinite;
+    pointer-events: none;
+  }
+  .wa-ripple::after { animation-delay: 1.5s; }
+
+  .chat-pop { animation: chat-pop 220ms ease-out; }
+}
