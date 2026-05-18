@@ -38,6 +38,7 @@ export const Route = createRootRoute({
       { title: "Automation Studio — AI-Powered Business Automation" },
       { name: "description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
       { name: "author", content: "Automation Studio" },
+      { name: "google-site-verification", content: "AVTOwLEXyEZUEa" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Automation Studio — AI-Powered Business Automation" },
