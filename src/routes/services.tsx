@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { SectionHeading } from "../components/SectionHeading";
+import { GlowCard, getGradient } from "../components/GlowCard";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -120,42 +121,39 @@ function ServicesPage() {
       <section className="section-padding">
         <div className="mx-auto max-w-5xl px-6 space-y-6">
           {allServices.map((service, i) => (
-            <motion.article
+            <GlowCard
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: "easeOut" as const }}
-              className="card-hover glass-card rounded-xl overflow-hidden"
+              gradient={getGradient(i)}
+              delay={i * 0.1}
             >
               <div className="p-7 md:p-10">
                 {/* Header */}
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-lg gold-gradient flex items-center justify-center text-2xl shrink-0 shadow-md shadow-cyan/20">
+                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1C] border border-white/10 flex items-center justify-center text-2xl shrink-0">
                     {service.icon}
                   </div>
                   <div className="flex-1">
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground tracking-tight">{service.title}</h2>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold text-white tracking-tight">{service.title}</h2>
                     <div className="flex flex-wrap items-center gap-3 mt-2">
-                      <span className="font-mono text-xs font-medium uppercase tracking-wider text-cyan border border-cyan/30 rounded-full px-2.5 py-0.5">{service.timeline}</span>
-                      <span className="font-mono text-sm font-semibold text-foreground">from {service.startingPrice}</span>
+                      <span className="font-mono text-xs font-medium uppercase tracking-wider text-white/70 border border-white/20 rounded-full px-2.5 py-0.5">{service.timeline}</span>
+                      <span className="font-mono text-sm font-semibold text-white">from {service.startingPrice}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Problem */}
-                <div className="mt-6 p-5 rounded-lg bg-destructive/10 border border-destructive/20">
-                  <p className="font-mono text-xs uppercase tracking-wider text-destructive font-semibold mb-2">// the problem</p>
-                  <p className="text-sm text-foreground/85 leading-relaxed">{service.problem}</p>
+                <div className="mt-6 p-5 rounded-xl bg-[#FF3D77]/10 border border-[#FF3D77]/20">
+                  <p className="font-mono text-xs uppercase tracking-wider text-[#FF3D77] font-semibold mb-2">// the problem</p>
+                  <p className="text-sm text-white/85 leading-relaxed">{service.problem}</p>
                 </div>
 
                 {/* Deliverables */}
                 <div className="mt-6">
-                  <p className="font-mono text-xs uppercase tracking-wider text-cyan font-semibold mb-3">// what you get</p>
+                  <p className="font-mono text-xs uppercase tracking-wider text-[#7DD3FC] font-semibold mb-3">// what you get</p>
                   <ul className="space-y-2.5">
                     {service.deliverables.map((d, j) => (
-                      <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <span className="text-cyan mt-0.5 shrink-0">✓</span>
+                      <li key={j} className="flex items-start gap-3 text-sm text-gray-400">
+                        <span className="text-[#7DD3FC] mt-0.5 shrink-0">✓</span>
                         <span>{d}</span>
                       </li>
                     ))}
@@ -166,13 +164,13 @@ function ServicesPage() {
                 <div className="mt-8">
                   <Link
                     to="/contact"
-                    className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-6 py-3 text-sm font-semibold text-gold-foreground shadow-md shadow-cyan/20 hover:shadow-cyan/40"
+                    className="btn-press inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold text-white border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all"
                   >
                     Get Started →
                   </Link>
                 </div>
               </div>
-            </motion.article>
+            </GlowCard>
           ))}
         </div>
       </section>
@@ -188,7 +186,7 @@ function ServicesPage() {
           />
           <Link
             to="/contact"
-            className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
+            className="btn-press neon-cta inline-flex items-center justify-center rounded-md px-8 py-4 text-sm font-semibold tracking-tight"
           >
             Book Your Free Audit →
           </Link>

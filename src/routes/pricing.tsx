@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "../components/SectionHeading";
+import { GlowCard, getGradient } from "../components/GlowCard";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -85,47 +86,41 @@ function PricingPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {packages.map((pkg, i) => (
-              <motion.div
+              <GlowCard
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, ease: "easeOut" as const }}
-                className={`relative card-hover rounded-xl flex flex-col overflow-hidden ${
-                  pkg.popular
-                    ? "glass-card border-cyan/50 shadow-xl shadow-cyan/10"
-                    : "glass-card"
-                }`}
+                gradient={getGradient(i)}
+                delay={i * 0.1}
               >
                 {pkg.popular && (
                   <>
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan to-transparent" />
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="font-mono inline-block gold-gradient px-3 py-1 text-[10px] font-bold text-gold-foreground rounded-full tracking-widest uppercase shadow-md shadow-cyan/30">
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan to-transparent z-20" />
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+                      <span className="font-mono inline-block px-3 py-1 text-[10px] font-bold text-white rounded-full tracking-widest uppercase"
+                        style={{ background: getGradient(i) }}>
                         Most Popular
                       </span>
                     </div>
                   </>
                 )}
                 <div className="p-7 md:p-9 flex flex-col flex-1">
-                  <h3 className="font-heading text-2xl font-bold text-foreground tracking-tight">{pkg.name}</h3>
+                  <h3 className="font-heading text-2xl font-bold text-white tracking-tight">{pkg.name}</h3>
                   <div className="mt-3 flex items-baseline gap-1">
-                    <span className="font-heading text-4xl font-bold text-foreground tracking-tight">{pkg.price}</span>
-                    <span className="font-mono text-xs text-muted-foreground">/{pkg.period}</span>
+                    <span className="font-heading text-4xl font-bold text-white tracking-tight">{pkg.price}</span>
+                    <span className="font-mono text-xs text-gray-500">/{pkg.period}</span>
                   </div>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{pkg.description}</p>
+                  <p className="mt-3 text-sm text-gray-400 leading-relaxed">{pkg.description}</p>
 
                   <div className="mt-7 flex-1">
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-cyan mb-3">// included</p>
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-white/70 mb-3">// included</p>
                     <ul className="space-y-2.5">
                       {pkg.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-2.5 text-sm text-foreground/85">
-                          <span className="text-cyan mt-0.5 shrink-0">✓</span>
+                        <li key={j} className="flex items-start gap-2.5 text-sm text-white/85">
+                          <span className="text-[#7DD3FC] mt-0.5 shrink-0">✓</span>
                           <span>{f}</span>
                         </li>
                       ))}
                       {pkg.notIncluded.map((f, j) => (
-                        <li key={`n-${j}`} className="flex items-start gap-2.5 text-sm text-muted-foreground/40">
+                        <li key={`n-${j}`} className="flex items-start gap-2.5 text-sm text-gray-500/50">
                           <span className="mt-0.5 shrink-0">—</span>
                           <span className="line-through">{f}</span>
                         </li>
@@ -138,19 +133,19 @@ function PricingPage() {
                       to="/contact"
                       className={`btn-press w-full inline-flex items-center justify-center rounded-md px-6 py-3.5 text-sm font-semibold ${
                         pkg.popular
-                          ? "gold-gradient text-gold-foreground shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
-                          : "border border-border bg-surface-3/60 text-foreground hover:border-cyan/40 hover:bg-surface-2"
+                          ? "neon-cta"
+                          : "border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 transition-all"
                       }`}
                     >
                       Get Started →
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </GlowCard>
             ))}
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-10">
+          <p className="text-center text-sm text-gray-500 mt-10">
             All packages include our ROI guarantee. Not sure which to choose?{" "}
             <Link to="/contact" className="text-cyan hover:text-cyan-light transition-colors font-medium">Book a free audit</Link>{" "}
             — we'll recommend the best fit.
@@ -164,20 +159,22 @@ function PricingPage() {
           <SectionHeading label="Customize" title="Add-ons." description="Enhance any package with targeted add-ons for your specific needs." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {addons.map((addon, i) => (
-              <motion.div
+              <GlowCard
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05, ease: "easeOut" as const }}
-                className="card-hover glass-card rounded-xl p-5"
+                gradient={getGradient(i + 3)}
+                delay={i * 0.05}
+                borderWidth={1}
+                glowBlur={30}
+                glowOpacity={0.4}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-sm font-semibold text-foreground">{addon.name}</h4>
-                  <span className="font-mono text-sm font-bold text-cyan">{addon.price}</span>
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-sm font-semibold text-white">{addon.name}</h4>
+                    <span className="font-mono text-sm font-bold text-[#7DD3FC]">{addon.price}</span>
+                  </div>
+                  <p className="text-xs text-gray-400 leading-relaxed">{addon.description}</p>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">{addon.description}</p>
-              </motion.div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -189,22 +186,23 @@ function PricingPage() {
           <SectionHeading label="FAQ" title="Frequently asked questions." description="Everything you need to know before getting started." />
           <div className="space-y-3">
             {faqs.map((faq, i) => (
-              <motion.div
+              <GlowCard
                 key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04, ease: "easeOut" as const }}
-                className="glass-card rounded-xl overflow-hidden"
+                gradient={getGradient(i)}
+                delay={i * 0.04}
+                borderWidth={1}
+                glowBlur={25}
+                glowOpacity={0.35}
+                noAnimation
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan/40 transition-colors hover:bg-surface-2/40"
+                  className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan/40 transition-colors hover:bg-white/5"
                   aria-expanded={openFaq === i}
                 >
-                  <span className="text-sm md:text-base font-semibold text-foreground pr-4">{faq.q}</span>
+                  <span className="text-sm md:text-base font-semibold text-white pr-4">{faq.q}</span>
                   <svg
-                    className={`w-5 h-5 text-cyan shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`}
+                    className={`w-5 h-5 text-[#7DD3FC] shrink-0 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -216,9 +214,9 @@ function PricingPage() {
                   transition={{ duration: 0.28, ease: "easeOut" as const }}
                   className="overflow-hidden"
                 >
-                  <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                  <p className="px-5 pb-5 text-sm text-gray-400 leading-relaxed">{faq.a}</p>
                 </motion.div>
-              </motion.div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -235,7 +233,7 @@ function PricingPage() {
           />
           <Link
             to="/contact"
-            className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
+            className="btn-press neon-cta inline-flex items-center justify-center rounded-md px-8 py-4 text-sm font-semibold tracking-tight"
           >
             Book Your Free Audit →
           </Link>

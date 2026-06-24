@@ -6,6 +6,7 @@ import { Hero3D } from "../components/Hero3D";
 import { Particles } from "../components/Particles";
 import { CountUp } from "../components/CountUp";
 import { TerminalTypewriter } from "../components/TerminalTypewriter";
+import { GlowCard, getGradient } from "../components/GlowCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -122,20 +123,22 @@ function HomePage() {
               { title: "Manual Operations", desc: "Your team spends hours on tasks that should take seconds. Time is your most valuable asset.", icon: "⏰" },
               { title: "No Systems", desc: "Without automation, scaling means hiring. And hiring means more complexity, not less.", icon: "🔧" },
             ].map((item, i) => (
-              <motion.div
+              <GlowCard
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, ease: "easeOut" as const }}
-                className="card-hover glass-card rounded-xl p-7"
+                gradient={getGradient(i)}
+                delay={i * 0.1}
+                innerClassName="h-full"
               >
-                <div className="w-11 h-11 rounded-lg bg-surface-3 border border-border/60 flex items-center justify-center text-xl">
-                  {item.icon}
+                <div className="w-full h-full p-7 flex flex-col justify-between">
+                  <div>
+                    <div className="w-11 h-11 rounded-lg bg-[#1A1A1C] border border-white/10 flex items-center justify-center text-xl mb-5">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-heading text-xl font-bold text-white mb-3 tracking-tight">{item.title}</h3>
+                    <p className="text-gray-400 text-[14px] leading-[1.6] font-normal selection:bg-white/20">{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-foreground mt-5">{item.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -151,27 +154,28 @@ function HomePage() {
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {services.map((service, i) => (
-              <motion.div
+              <GlowCard
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, ease: "easeOut" as const }}
-                className={`tilt-card glass-card rounded-xl p-7 ${service.size === "lg" ? "md:col-span-2" : ""}`}
+                gradient={getGradient(i + 3)}
+                delay={i * 0.1}
+                className={service.size === "lg" ? "md:col-span-2" : ""}
+                innerClassName="h-full"
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-11 h-11 rounded-lg gold-gradient flex items-center justify-center text-xl shrink-0 shadow-md shadow-cyan/20 animate-float"
-                    style={{ animationDelay: `${i * 0.25}s` }}
-                  >
-                    {service.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-lg font-bold text-foreground">{service.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                <div className="w-full h-full p-7 flex flex-col justify-between">
+                  <div className="flex items-start gap-4">
+                    <div
+                      className="w-11 h-11 rounded-lg bg-[#1A1A1C] border border-white/10 flex items-center justify-center text-xl shrink-0 animate-float"
+                      style={{ animationDelay: `${i * 0.25}s` }}
+                    >
+                      {service.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-lg font-bold text-white tracking-tight">{service.title}</h3>
+                      <p className="mt-2 text-gray-400 text-[14px] leading-[1.6] font-normal selection:bg-white/20">{service.description}</p>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </GlowCard>
             ))}
           </div>
           <div className="mt-12 text-center">
@@ -195,21 +199,20 @@ function HomePage() {
           />
 
           {/* Code/terminal showcase */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" as const }}
-            className="max-w-3xl mx-auto mb-14 glass-card rounded-xl overflow-hidden"
+          <GlowCard
+            gradient={getGradient(1)}
+            delay={0.1}
+            className="max-w-3xl mx-auto mb-14"
+            innerClassName="overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/40 bg-surface-3/60">
-              <span className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan/70" />
-              <span className="ml-3 font-mono text-xs text-muted-foreground">automation.workflow.ts</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 bg-[#1A1A1C]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF3D77]/60" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFB1CE]/60" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF9D3C]/70" />
+              <span className="ml-3 font-mono text-xs text-gray-500">automation.workflow.ts</span>
             </div>
             <TerminalTypewriter />
-          </motion.div>
+          </GlowCard>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
@@ -276,29 +279,29 @@ function HomePage() {
             title="Case studies coming soon."
             description="Currently onboarding first clients. Want to be one of them?"
           />
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" as const }}
-            className="max-w-2xl mx-auto glass-card rounded-xl p-10 text-center"
+          <GlowCard
+            gradient={getGradient(2)}
+            delay={0.1}
+            className="max-w-2xl mx-auto"
           >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-cyan/10 border border-cyan/30 mb-5">
-              <span className="text-2xl">🚀</span>
+            <div className="w-full h-full p-10 text-center">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#1A1A1C] border border-white/10 mb-5">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <p className="text-base md:text-lg text-white/85 leading-relaxed">
+                Case studies coming soon — currently onboarding first clients.
+              </p>
+              <p className="mt-3 text-sm text-gray-400">
+                Results vary. Book a free audit to see what's possible for your business.
+              </p>
+              <Link
+                to="/contact"
+                className="btn-press neon-cta mt-7 inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold"
+              >
+                Become a founding client →
+              </Link>
             </div>
-            <p className="text-base md:text-lg text-foreground/85 leading-relaxed">
-              Case studies coming soon — currently onboarding first clients.
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Results vary. Book a free audit to see what's possible for your business.
-            </p>
-            <Link
-              to="/contact"
-              className="btn-press neon-cta mt-7 inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold"
-            >
-              Become a founding client →
-            </Link>
-          </motion.div>
+          </GlowCard>
         </div>
       </section>
 
@@ -310,9 +313,14 @@ function HomePage() {
             title="Book your free audit."
             description="Discover how much time and money you could save. No commitment, no pressure — just clarity."
           />
-          <div className="glass-card rounded-xl p-8 md:p-10">
-            <LeadCaptureForm />
-          </div>
+          <GlowCard
+            gradient={getGradient(0)}
+            delay={0.1}
+          >
+            <div className="w-full h-full p-8 md:p-10">
+              <LeadCaptureForm />
+            </div>
+          </GlowCard>
         </div>
       </section>
 
