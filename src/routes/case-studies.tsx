@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "../components/SectionHeading";
+import { GlowCard, getGradient } from "../components/GlowCard";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -130,7 +131,7 @@ function CaseStudiesPage() {
       <section className="bg-surface-1/60 backdrop-blur-md py-5 border-y border-border/40 sticky top-16 md:top-20 z-30">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter by industry">
-            {industries.map((industry) => (
+            {industries.map((industry, i) => (
               <button
                 key={industry}
                 role="tab"
@@ -138,9 +139,10 @@ function CaseStudiesPage() {
                 onClick={() => setActiveFilter(industry)}
                 className={`btn-press px-4 py-2 rounded-md text-sm font-medium border transition-all ${
                   activeFilter === industry
-                    ? "gold-gradient text-gold-foreground border-cyan/40 shadow-md shadow-cyan/20"
-                    : "bg-surface-2/60 border-border text-muted-foreground hover:text-foreground hover:border-cyan/30"
+                    ? "text-white border-white/30 shadow-md"
+                    : "bg-[#1A1A1C]/60 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
                 }`}
+                style={activeFilter === industry ? { background: getGradient(i), borderColor: "transparent" } : {}}
               >
                 {industry}
               </button>
@@ -152,45 +154,42 @@ function CaseStudiesPage() {
       {/* Case studies */}
       <section className="section-padding">
         <div className="mx-auto max-w-5xl px-6 space-y-8">
-          {filtered.map((study) => (
-            <motion.article
+          {filtered.map((study, i) => (
+            <GlowCard
               key={study.client}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: "easeOut" as const }}
-              className="card-hover glass-card rounded-xl overflow-hidden"
+              gradient={getGradient(i)}
+              delay={i * 0.1}
             >
               <div className="p-8 md:p-12">
                 {/* Header */}
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-cyan border border-cyan/30 rounded-full px-2.5 py-0.5">{study.industry}</span>
+                  <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#7DD3FC] border border-[#7DD3FC]/30 rounded-full px-2.5 py-0.5">{study.industry}</span>
                   {study.services.map((s) => (
-                    <span key={s} className="text-xs font-medium bg-surface-3 text-muted-foreground px-2.5 py-0.5 rounded-full border border-border/50">{s}</span>
+                    <span key={s} className="text-xs font-medium bg-[#1A1A1C] text-gray-400 px-2.5 py-0.5 rounded-full border border-white/10">{s}</span>
                   ))}
                 </div>
-                <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground leading-snug tracking-tight">{study.title}</h2>
-                <p className="font-mono text-xs text-muted-foreground mt-2">{study.client}</p>
+                <h2 className="font-heading text-xl md:text-2xl font-bold text-white leading-snug tracking-tight">{study.title}</h2>
+                <p className="font-mono text-xs text-gray-500 mt-2">{study.client}</p>
 
                 {/* Before vs After */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-7">
-                  <div className="p-5 rounded-lg bg-destructive/10 border border-destructive/20">
-                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-destructive mb-3">// before</h4>
+                  <div className="p-5 rounded-xl bg-[#FF3D77]/10 border border-[#FF3D77]/20">
+                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#FF3D77] mb-3">// before</h4>
                     <ul className="space-y-2">
                       {study.before.map((b, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="text-destructive mt-0.5 shrink-0">✗</span>
+                        <li key={j} className="flex items-start gap-2 text-sm text-gray-400">
+                          <span className="text-[#FF3D77] mt-0.5 shrink-0">✗</span>
                           <span>{b}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="p-5 rounded-lg bg-cyan/10 border border-cyan/30">
-                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan mb-3">// after</h4>
+                  <div className="p-5 rounded-xl bg-[#06B6D4]/10 border border-[#06B6D4]/20">
+                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#06B6D4] mb-3">// after</h4>
                     <ul className="space-y-2">
                       {study.after.map((a, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-foreground/85">
-                          <span className="text-cyan mt-0.5 shrink-0">✓</span>
+                        <li key={j} className="flex items-start gap-2 text-sm text-white/85">
+                          <span className="text-[#06B6D4] mt-0.5 shrink-0">✓</span>
                           <span>{a}</span>
                         </li>
                       ))}
@@ -201,31 +200,31 @@ function CaseStudiesPage() {
                 {/* KPI blocks */}
                 <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3">
                   {study.kpis.map((kpi, j) => (
-                    <div key={j} className="text-center p-4 rounded-lg bg-surface-3/60 border border-border/50">
-                      <p className="font-heading text-xl md:text-2xl font-bold gold-text-gradient tracking-tight">{kpi.value}</p>
-                      <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mt-1.5">{kpi.label}</p>
-                      <p className="font-mono text-[10px] text-muted-foreground/50 mt-0.5">was: {kpi.before}</p>
+                    <div key={j} className="text-center p-4 rounded-xl bg-[#1A1A1C] border border-white/10">
+                      <p className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">{kpi.value}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-gray-500 mt-1.5">{kpi.label}</p>
+                      <p className="font-mono text-[10px] text-gray-500/50 mt-0.5">was: {kpi.before}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* Quote */}
-                <div className="mt-8 pt-6 border-t border-border/40 flex flex-col md:flex-row gap-4 md:items-center">
-                  <div className="w-12 h-12 rounded-full gold-gradient flex items-center justify-center text-sm font-semibold text-gold-foreground shrink-0">
+                <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row gap-4 md:items-center">
+                  <div className="w-12 h-12 rounded-full bg-[#1A1A1C] border border-white/10 flex items-center justify-center text-sm font-semibold text-white shrink-0">
                     {study.quoteName.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div>
-                    <p className="text-sm text-foreground/85 italic leading-relaxed">"{study.quote}"</p>
-                    <p className="text-xs font-medium text-cyan mt-2">— {study.quoteName}, {study.quoteRole}</p>
+                    <p className="text-sm text-white/85 italic leading-relaxed">"{study.quote}"</p>
+                    <p className="text-xs font-medium text-[#7DD3FC] mt-2">— {study.quoteName}, {study.quoteRole}</p>
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </GlowCard>
           ))}
 
           {filtered.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-muted-foreground">No case studies found for this industry yet. Check back soon!</p>
+              <p className="text-gray-500">No case studies found for this industry yet. Check back soon!</p>
             </div>
           )}
         </div>
@@ -242,7 +241,7 @@ function CaseStudiesPage() {
           />
           <Link
             to="/contact"
-            className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-8 py-4 text-sm font-semibold text-gold-foreground shadow-lg shadow-cyan/30 hover:shadow-cyan/50"
+            className="btn-press neon-cta inline-flex items-center justify-center rounded-md px-8 py-4 text-sm font-semibold tracking-tight"
           >
             Book Your Free Audit →
           </Link>
