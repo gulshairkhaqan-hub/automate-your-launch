@@ -460,4 +460,16 @@
   .wa-ripple::after { animation-delay: 1.5s; }
 
   .chat-pop { animation: chat-pop 220ms ease-out; }
+
+  /* Universal glow button — gradient border on hover */
+  .glow-btn {
+    position: relative;
+    background: linear-gradient(#1A1A1C, #1A1A1C) padding-box, linear-gradient(135deg, #FF3D77, #7DD3FC, #4361EE) border-box;
+    border: 2px solid transparent;
+    transition: all 220ms ease-out;
+  }
+  .glow-btn:hover {
+    background: linear-gradient(#1A1A1C, #1A1A1C) padding-box, linear-gradient(135deg, #FF3D77, #7DD3FC, #4361EE) border-box;
+    box-shadow: 0 0 20px -4px rgba(99, 102, 241, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.2);
+  }
 }
