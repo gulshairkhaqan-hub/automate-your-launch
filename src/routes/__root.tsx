@@ -35,22 +35,37 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Automation Studio — AI-Powered Business Automation" },
-      { name: "description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
+      { title: "Automation Studio — Premium AI Automation Systems" },
+      {
+        name: "description",
+        content:
+          "Premium AI automation systems for service businesses that need faster execution, cleaner operations, and measurable growth.",
+      },
       { name: "author", content: "Automation Studio" },
       { name: "google-site-verification", content: "AVTOwLEXyEZUEaL1CbROkWscoRX_tIeuNXWBAodwYlk" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Automation Studio — AI-Powered Business Automation" },
-      { name: "twitter:title", content: "Automation Studio — AI-Powered Business Automation" },
-      { property: "og:description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
-      { name: "twitter:description", content: "Automate your business, capture every lead, and scale without burnout. Premium AI automation for coaches, agencies, and modern businesses." },
+      { property: "og:title", content: "Automation Studio — Premium AI Automation Systems" },
+      { name: "twitter:title", content: "Automation Studio — Premium AI Automation Systems" },
+      {
+        property: "og:description",
+        content:
+          "Premium AI automation systems for service businesses that need faster execution, cleaner operations, and measurable growth.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Premium AI automation systems for service businesses that need faster execution, cleaner operations, and measurable growth.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
