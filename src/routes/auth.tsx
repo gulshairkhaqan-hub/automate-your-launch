@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === "string" ? s.next : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Admin Sign In — Automation Studio" },
@@ -15,8 +18,16 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+function safeNext(next: string | undefined): string | null {
+  if (!next) return null;
+  if (!next.startsWith("/") || next.startsWith("//")) return null;
+  return next;
+}
+
 function AuthPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
+  const target = safeNext(next);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,19 +35,28 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin/leads" });
+      if (data.session) {
+        if (target) {
+          window.location.href = target;
+        } else {
+          navigate({ to: "/admin/leads" });
+        }
+      }
     });
-  }, [navigate]);
+  }, [navigate, target]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
       if (mode === "signup") {
+        const redirect = target
+          ? `${window.location.origin}${target}`
+          : `${window.location.origin}/admin/leads`;
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/admin/leads` },
+          options: { emailRedirectTo: redirect },
         });
         if (error) throw error;
         toast.success("Account created. Check your email to confirm.");
@@ -44,7 +64,11 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Signed in");
-        navigate({ to: "/admin/leads" });
+        if (target) {
+          window.location.href = target;
+        } else {
+          navigate({ to: "/admin/leads" });
+        }
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Authentication failed");
