@@ -26,9 +26,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
-        scrolled
-          ? "header-scrolled"
-          : "bg-transparent border-transparent"
+        scrolled ? "header-scrolled" : "bg-transparent border-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8 flex items-center justify-between h-16 md:h-20">
@@ -62,7 +60,7 @@ export function Header() {
             to="/contact"
             className="btn-press inline-flex items-center justify-center rounded-md gold-gradient px-5 py-2.5 text-sm font-semibold text-gold-foreground tracking-tight hover:shadow-lg hover:shadow-cyan/30"
           >
-            Book Free Audit
+            Book Audit
           </Link>
         </div>
 
@@ -73,9 +71,15 @@ export function Header() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          <span className={`w-5 h-0.5 bg-foreground transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`w-5 h-0.5 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`w-5 h-0.5 bg-foreground transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span
+            className={`w-5 h-0.5 bg-foreground transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
+          />
+          <span
+            className={`w-5 h-0.5 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`w-5 h-0.5 bg-foreground transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
+          />
         </button>
       </div>
 
@@ -108,7 +112,7 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 inline-flex items-center justify-center rounded-md gold-gradient px-5 py-3.5 text-sm font-semibold text-gold-foreground"
               >
-                Book Free Audit
+                Book Audit
               </Link>
             </nav>
           </motion.div>

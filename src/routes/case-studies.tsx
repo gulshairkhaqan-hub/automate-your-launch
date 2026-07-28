@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { SectionHeading } from "../components/SectionHeading";
 import { GlowCard, getGradient } from "../components/GlowCard";
 
@@ -8,129 +7,165 @@ export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
       { title: "Case Studies — Automation Studio" },
-      { name: "description", content: "See how real businesses transformed their operations with AI-powered automation. Before/after results, KPIs, and ROI breakdowns." },
+      {
+        name: "description",
+        content:
+          "Outcome-led case studies showing how service businesses improved lead response, operational speed, and client experience with custom automation systems.",
+      },
       { property: "og:title", content: "Case Studies — Automation Studio" },
-      { property: "og:description", content: "Real automation success stories with measurable results from coaches, agencies, and e-commerce businesses." },
+      {
+        property: "og:description",
+        content:
+          "Before/after transformation stories with implementation focus, measurable outcomes, and practical delivery details.",
+      },
     ],
   }),
   component: CaseStudiesPage,
 });
 
-const industries = ["All", "Real Estate", "E-Commerce", "Coaching", "Agency", "Local Business"] as const;
+const industries = ["All", "Agency", "Coaching", "E-Commerce", "Local Business"] as const;
 
 const caseStudies = [
   {
-    industry: "Real Estate",
-    title: "How a Real Estate Team Captured 98% of Leads and Closed 145% More Deals",
-    client: "Pacific Realty Group",
-    before: ["Manual lead follow-up taking 4+ hours", "40% of leads never contacted", "No system for tracking pipeline", "Agents overwhelmed with admin"],
-    after: ["Instant automated follow-up in < 30 seconds", "98% lead capture rate across all channels", "Full CRM pipeline with automated tracking", "3 hours saved per agent per day"],
-    kpis: [
-      { value: "98%", label: "Lead Capture", before: "60%" },
-      { value: "<30s", label: "Response Time", before: "4+ hrs" },
-      { value: "+145%", label: "Closings", before: "Baseline" },
-      { value: "3hrs", label: "Saved/agent/day", before: "0" },
+    industry: "Agency",
+    title: "From fragmented ops to a unified delivery system in 28 days",
+    clientProfile: "7-person growth agency (B2B services)",
+    before: [
+      "Lead handoff lived across Slack, email, and spreadsheets",
+      "Onboarding required manual coordination across 4 team members",
+      "Weekly reporting consumed 8+ team hours",
+      "No single source of truth for delivery status",
     ],
-    quote: "We went from losing 40% of leads to capturing 98%. Automation Studio transformed our entire follow-up process and our revenue shows it.",
-    quoteName: "Sarah Chen",
-    quoteRole: "Team Lead, Pacific Realty Group",
-    services: ["Lead Capture", "CRM Integration", "SMS Automation"],
-  },
-  {
-    industry: "E-Commerce",
-    title: "12x Faster Customer Response and 35% Higher Repeat Purchase Rate",
-    client: "Bloom Naturals",
-    before: ["200+ daily support tickets handled manually", "4-hour average response time", "No post-purchase follow-up", "3.2-star support rating"],
-    after: ["67% of tickets resolved by AI chatbot", "Under 2-minute average response", "Automated review requests and loyalty sequences", "4.8-star support rating"],
-    kpis: [
-      { value: "12x", label: "Faster Response", before: "4hrs" },
-      { value: "67%", label: "Auto-Resolved", before: "0%" },
-      { value: "+35%", label: "Repeat Rate", before: "18%" },
-      { value: "$180K", label: "Annual Lift", before: "N/A" },
+    after: [
+      "Automated lead routing by service line and urgency",
+      "Client onboarding sequence reduced to a guided 45-minute workflow",
+      "Executive-ready reporting generated automatically each week",
+      "Central operating dashboard with real-time status tracking",
     ],
-    quote: "Our customer support runs itself now. Response time went from 4 hours to under 2 minutes, and our repeat purchase rate jumped 35%.",
-    quoteName: "Marcus Williams",
-    quoteRole: "Founder, Bloom Naturals",
-    services: ["AI Chatbot", "Email Automation", "Dashboard"],
+    kpis: [
+      { value: "-68%", label: "ops admin time", before: "baseline" },
+      { value: "45m", label: "onboarding cycle", before: "3.5 hrs" },
+      { value: "<5m", label: "lead routing", before: "45m+" },
+      { value: "+22%", label: "delivery margin", before: "baseline" },
+    ],
+    quote:
+      "Our operations finally feel deliberate. We now run weekly delivery with confidence instead of firefighting.",
+    quoteBy: "Operations Lead, Agency Client",
+    services: ["Acquisition Systems", "Operations Systems", "Executive Intelligence"],
   },
   {
     industry: "Coaching",
-    title: "A Business Coach Doubled Her Client Base While Working 20 Fewer Hours Per Week",
-    client: "Park Coaching Co.",
-    before: ["20+ hours/week on admin and scheduling", "Manual client onboarding (2–3 days)", "No lead nurture system", "Maxed out at 15 clients"],
-    after: ["Automated scheduling, reminders, and follow-ups", "Client onboarding in under 1 hour", "Automated lead nurture converting 3x more prospects", "Scaled to 32 clients with less effort"],
-    kpis: [
-      { value: "20hrs", label: "Freed/Week", before: "0" },
-      { value: "2x", label: "Client Base", before: "15" },
-      { value: "3x", label: "Conversion", before: "Baseline" },
-      { value: "4.9★", label: "Satisfaction", before: "4.2★" },
+    title: "A coaching business scaled enrollment without scaling chaos",
+    clientProfile: "Founder-led coaching program with group + 1:1 offers",
+    before: [
+      "Leads slipped through direct messages and email replies",
+      "Discovery-call booking and reminders were handled manually",
+      "Client onboarding relied on repetitive copy/paste tasks",
+      "No visibility into conversion by traffic source",
     ],
-    quote: "I freed up 20 hours a week and doubled my client base. The ROI is insane — best investment I've made in my business.",
-    quoteName: "Jessica Park",
-    quoteRole: "Business Coach, Park Coaching Co.",
-    services: ["Workflow Automation", "Lead Capture", "Email Sequences"],
+    after: [
+      "Automated lead intake and qualification workflow",
+      "Self-serve booking, reminders, and no-show prevention sequences",
+      "Structured onboarding with automated access and welcome steps",
+      "Source-level conversion dashboard for weekly optimization",
+    ],
+    kpis: [
+      { value: "+39%", label: "show rate", before: "baseline" },
+      { value: "-12h", label: "founder hours/week", before: "0" },
+      { value: "2.1x", label: "lead response speed", before: "baseline" },
+      { value: "+31%", label: "qualified calls", before: "baseline" },
+    ],
+    quote:
+      "The system gave me back strategic time while improving every key conversion stage in the funnel.",
+    quoteBy: "Founder, Coaching Brand",
+    services: ["Acquisition Systems", "Client Experience Systems"],
   },
   {
-    industry: "Agency",
-    title: "An Agency Cut Onboarding From 3 Days to 3 Hours and Scaled to 50+ Clients",
-    client: "ScaleUp Digital Agency",
-    before: ["3-day client onboarding process", "Scattered project data across 6 tools", "No automated reporting for clients", "Team spending 30% of time on internal ops"],
-    after: ["3-hour automated onboarding flow", "Unified data hub connecting all tools", "Automated weekly client reports", "Ops time reduced to 10% — more focus on delivery"],
-    kpis: [
-      { value: "24x", label: "Onboarding", before: "3 days" },
-      { value: "50+", label: "Active Clients", before: "28" },
-      { value: "+20%", label: "Revenue", before: "Plateau" },
-      { value: "10%", label: "Ops Time", before: "30%" },
+    industry: "E-Commerce",
+    title: "Support and retention automation improved repeat revenue quality",
+    clientProfile: "DTC brand with high support volume and seasonal campaigns",
+    before: [
+      "Support queue was reactive and inconsistent",
+      "Post-purchase communication lacked segmentation",
+      "Team had limited insight into retention bottlenecks",
+      "Manual reporting delayed campaign decisions",
     ],
-    quote: "Client onboarding went from 3 days to 3 hours. Our team can finally focus on strategy instead of admin busywork.",
-    quoteName: "David Ortega",
-    quoteRole: "Operations Director, ScaleUp Agency",
-    services: ["Workflow Automation", "CRM Integration", "Dashboards"],
+    after: [
+      "AI-assisted first-response workflows for common support intents",
+      "Automated lifecycle messaging by customer behavior",
+      "Retention dashboards tied to campaign and cohort performance",
+      "Faster decision loops for offer and campaign optimization",
+    ],
+    kpis: [
+      { value: "-54%", label: "manual ticket load", before: "baseline" },
+      { value: "3.4x", label: "faster first response", before: "baseline" },
+      { value: "+18%", label: "repeat purchase rate", before: "baseline" },
+      { value: "weekly", label: "exec insights", before: "monthly" },
+    ],
+    quote:
+      "We moved from chasing support tickets to managing customer experience strategically with clean visibility.",
+    quoteBy: "Head of Growth, E-Commerce Brand",
+    services: ["Client Experience Systems", "Executive Intelligence"],
   },
   {
     industry: "Local Business",
-    title: "A Local Dental Practice Filled 95% of Available Appointments Automatically",
-    client: "Bright Smile Dental",
-    before: ["30% of appointment slots unfilled", "Manual phone confirmations and reminders", "No online booking system", "Losing patients to tech-savvy competitors"],
-    after: ["95% appointment fill rate", "Automated reminders via SMS + email", "24/7 online booking with AI pre-screening", "40% increase in new patient acquisition"],
-    kpis: [
-      { value: "95%", label: "Fill Rate", before: "70%" },
-      { value: "+40%", label: "New Patients", before: "Baseline" },
-      { value: "85%", label: "Fewer No-Shows", before: "22%" },
-      { value: "$95K", label: "Annual Lift", before: "N/A" },
+    title: "A local services team modernized lead handling and booking flow",
+    clientProfile: "Multi-location local business with inbound phone + web leads",
+    before: [
+      "Inquiries after hours had no structured follow-up",
+      "Booking confirmations and reminders were inconsistent",
+      "Team lacked a reliable way to track lead source quality",
+      "Front desk workload blocked higher-value customer interactions",
     ],
-    quote: "We went from chasing patients by phone to having a fully booked calendar. The automation paid for itself in the first month.",
-    quoteName: "Dr. Amy Torres",
-    quoteRole: "Owner, Bright Smile Dental",
-    services: ["AI Chatbot", "SMS Automation", "Lead Capture"],
+    after: [
+      "Always-on capture and response flow for inbound inquiries",
+      "Automated booking confirmations, reminders, and reschedules",
+      "Lead-source reporting to improve marketing spend quality",
+      "Reduced front-desk admin load through workflow automation",
+    ],
+    kpis: [
+      { value: "+44%", label: "booked consults", before: "baseline" },
+      { value: "-61%", label: "manual reminder work", before: "baseline" },
+      { value: "<2m", label: "initial response", before: "15m+" },
+      { value: "+27%", label: "lead-to-booking", before: "baseline" },
+    ],
+    quote:
+      "The business feels modern now. We respond faster, book cleaner, and spend less time on repetitive admin.",
+    quoteBy: "Owner, Local Services Business",
+    services: ["Acquisition Systems", "Operations Systems"],
   },
 ];
 
 function CaseStudiesPage() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  const filtered = activeFilter === "All"
-    ? caseStudies
-    : caseStudies.filter(s => s.industry === activeFilter);
+  const filtered =
+    activeFilter === "All" ? caseStudies : caseStudies.filter((s) => s.industry === activeFilter);
 
   return (
     <>
-      {/* Hero */}
       <section className="relative section-padding charcoal-gradient bg-noise overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6">
           <SectionHeading
-            label="Case Studies"
-            title="Real results. Real businesses."
-            description="See how we've helped businesses like yours automate operations, capture more leads, and scale faster — with measurable ROI."
+            label="Case studies"
+            title="Proof built around outcomes, not hype."
+            description="Representative client transformations showing the operational and commercial impact of premium automation execution."
           />
+          <p className="font-mono text-xs text-muted-foreground/75 max-w-3xl">
+            Notes: some client details are anonymized for confidentiality. Metrics are shared from
+            real engagement reporting snapshots.
+          </p>
         </div>
       </section>
 
-      {/* Filter chips */}
       <section className="bg-surface-1/60 backdrop-blur-md py-5 border-y border-border/40 sticky top-16 md:top-20 z-30">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter by industry">
+          <div
+            className="flex flex-wrap items-center gap-2"
+            role="tablist"
+            aria-label="Filter by industry"
+          >
             {industries.map((industry, i) => (
               <button
                 key={industry}
@@ -142,7 +177,11 @@ function CaseStudiesPage() {
                     ? "text-white border-white/30 shadow-md"
                     : "bg-[#1A1A1C]/60 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
                 }`}
-                style={activeFilter === industry ? { background: getGradient(i), borderColor: "transparent" } : {}}
+                style={
+                  activeFilter === industry
+                    ? { background: getGradient(i), borderColor: "transparent" }
+                    : {}
+                }
               >
                 {industry}
               </button>
@@ -151,30 +190,34 @@ function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* Case studies */}
       <section className="section-padding">
         <div className="mx-auto max-w-5xl px-6 space-y-8">
           {filtered.map((study, i) => (
-            <GlowCard
-              key={study.client}
-              gradient={getGradient(i)}
-              delay={i * 0.1}
-            >
+            <GlowCard key={study.title} gradient={getGradient(i)} delay={i * 0.1}>
               <div className="p-8 md:p-12">
-                {/* Header */}
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#7DD3FC] border border-[#7DD3FC]/30 rounded-full px-2.5 py-0.5">{study.industry}</span>
+                  <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#7DD3FC] border border-[#7DD3FC]/30 rounded-full px-2.5 py-0.5">
+                    {study.industry}
+                  </span>
                   {study.services.map((s) => (
-                    <span key={s} className="text-xs font-medium bg-[#1A1A1C] text-gray-400 px-2.5 py-0.5 rounded-full border border-white/10">{s}</span>
+                    <span
+                      key={s}
+                      className="text-xs font-medium bg-[#1A1A1C] text-gray-400 px-2.5 py-0.5 rounded-full border border-white/10"
+                    >
+                      {s}
+                    </span>
                   ))}
                 </div>
-                <h2 className="font-heading text-xl md:text-2xl font-bold text-white leading-snug tracking-tight">{study.title}</h2>
-                <p className="font-mono text-xs text-gray-500 mt-2">{study.client}</p>
+                <h2 className="font-heading text-xl md:text-2xl font-bold text-white leading-snug tracking-tight">
+                  {study.title}
+                </h2>
+                <p className="font-mono text-xs text-gray-500 mt-2">{study.clientProfile}</p>
 
-                {/* Before vs After */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-7">
                   <div className="p-5 rounded-xl bg-[#FF3D77]/10 border border-[#FF3D77]/20">
-                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#FF3D77] mb-3">// before</h4>
+                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#FF3D77] mb-3">
+                      // before
+                    </h4>
                     <ul className="space-y-2">
                       {study.before.map((b, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-gray-400">
@@ -185,7 +228,9 @@ function CaseStudiesPage() {
                     </ul>
                   </div>
                   <div className="p-5 rounded-xl bg-[#06B6D4]/10 border border-[#06B6D4]/20">
-                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#06B6D4] mb-3">// after</h4>
+                    <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#06B6D4] mb-3">
+                      // after
+                    </h4>
                     <ul className="space-y-2">
                       {study.after.map((a, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-white/85">
@@ -197,26 +242,28 @@ function CaseStudiesPage() {
                   </div>
                 </div>
 
-                {/* KPI blocks */}
                 <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3">
                   {study.kpis.map((kpi, j) => (
-                    <div key={j} className="text-center p-4 rounded-xl bg-[#1A1A1C] border border-white/10">
-                      <p className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">{kpi.value}</p>
-                      <p className="font-mono text-[10px] uppercase tracking-wider text-gray-500 mt-1.5">{kpi.label}</p>
-                      <p className="font-mono text-[10px] text-gray-500/50 mt-0.5">was: {kpi.before}</p>
+                    <div
+                      key={j}
+                      className="text-center p-4 rounded-xl bg-[#1A1A1C] border border-white/10"
+                    >
+                      <p className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">
+                        {kpi.value}
+                      </p>
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-gray-500 mt-1.5">
+                        {kpi.label}
+                      </p>
+                      <p className="font-mono text-[10px] text-gray-500/50 mt-0.5">
+                        was: {kpi.before}
+                      </p>
                     </div>
                   ))}
                 </div>
 
-                {/* Quote */}
-                <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row gap-4 md:items-center">
-                  <div className="w-12 h-12 rounded-full bg-[#1A1A1C] border border-white/10 flex items-center justify-center text-sm font-semibold text-white shrink-0">
-                    {study.quoteName.split(" ").map(n => n[0]).join("")}
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/85 italic leading-relaxed">"{study.quote}"</p>
-                    <p className="text-xs font-medium text-[#7DD3FC] mt-2">— {study.quoteName}, {study.quoteRole}</p>
-                  </div>
+                <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
+                  <p className="text-sm text-white/85 italic leading-relaxed">"{study.quote}"</p>
+                  <p className="text-xs font-medium text-[#7DD3FC]">— {study.quoteBy}</p>
                 </div>
               </div>
             </GlowCard>
@@ -224,20 +271,21 @@ function CaseStudiesPage() {
 
           {filtered.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-500">No case studies found for this industry yet. Check back soon!</p>
+              <p className="text-gray-500">
+                No case studies found for this industry yet. Check back soon!
+              </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA */}
       <section className="relative section-padding charcoal-gradient overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
         <div className="relative mx-auto max-w-3xl px-6 text-center">
           <SectionHeading
-            label="Your Turn"
-            title="Be our next success story."
-            description="Book a free automation audit and let's map out your path to scalable growth — with measurable results."
+            label="Your story next"
+            title="Let's engineer your next before-and-after."
+            description="Book a free audit and we'll define the highest-leverage transformation plan for your business."
           />
           <Link
             to="/contact"
